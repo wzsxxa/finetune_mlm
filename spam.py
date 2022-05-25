@@ -13,8 +13,8 @@ checkpoint = "distilbert-base-uncased"
 model = AutoModelForMaskedLM.from_pretrained(checkpoint)
 tokenizer = AutoTokenizer.from_pretrained(checkpoint)
 imdb_dataset = load_dataset('imdb', cache_dir="~/datasets")
-train_size = 10_000
-test_size = 1000
+train_size = 20_000
+test_size = 2000
 imdb_dataset = imdb_dataset["train"].train_test_split(
     train_size=train_size, test_size=test_size, seed=42
 )
@@ -107,7 +107,7 @@ training_args = TrainingArguments(
     evaluation_strategy='epoch',
     learning_rate=2e-5,
     weight_decay=0.01,
-    num_train_epochs=1.0,
+    num_train_epochs=10.0,
     per_device_eval_batch_size=batch_size,
     per_device_train_batch_size=batch_size,
     remove_unused_columns=False,
