@@ -12,7 +12,7 @@ import math
 checkpoint = "distilbert-base-uncased"
 model = AutoModelForMaskedLM.from_pretrained(checkpoint)
 tokenizer = AutoTokenizer.from_pretrained(checkpoint)
-imdb_dataset = load_dataset('imdb', cache_dir="/home/wanxl/datasets")
+imdb_dataset = load_dataset('imdb', cache_dir="~/datasets")
 train_size = 10_000
 test_size = 1000
 imdb_dataset = imdb_dataset["train"].train_test_split(
@@ -100,7 +100,7 @@ def whole_word_masking_data_collator(features):
     return default_data_collator(features)
 
 
-batch_size = 6
+batch_size = 64
 training_args = TrainingArguments(
     output_dir='./model-finetuned-imdb',
     overwrite_output_dir=True,
