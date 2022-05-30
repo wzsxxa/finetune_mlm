@@ -13,7 +13,8 @@ checkpoint = "distilbert-base-uncased"
 model = AutoModelForMaskedLM.from_pretrained(checkpoint)
 for k, v in model.named_parameters():
     # print(type(v))
-    v.requires_grad_(False)
+#    v.requires_grad_(False)
+    pass
 
 # for k, v in model.named_parameters():
 #     print(v)
