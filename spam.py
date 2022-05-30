@@ -12,7 +12,11 @@ import math
 checkpoint = "distilbert-base-uncased"
 model = AutoModelForMaskedLM.from_pretrained(checkpoint)
 for k, v in model.named_parameters():
-    print(f'key:{k},  value:{v}')
+    print(type(v))
+    v.requires_grad_(False)
+
+for k, v in model.named_parameters():
+    print(v)
 # model.forward(input_ids=None, attention_mask=None, labels=None)
 # tokenizer = AutoTokenizer.from_pretrained(checkpoint)
 # imdb_dataset = load_dataset('imdb')
