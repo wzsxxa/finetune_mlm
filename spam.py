@@ -30,10 +30,10 @@ def tokenize_function(examples):
 
 
 tokenized_datasets = imdb_dataset.map(tokenize_function, batched=True, remove_columns=["text", "label"])
-# print(tokenized_datasets)
+print(tokenized_datasets)
 chunk_size = 128
 tokenized_samples = tokenized_datasets["train"][:3]
-# print(type(tokenized_samples["input_ids"]))
+print(tokenized_samples)
 
 
 def group_texts(examples):
@@ -112,6 +112,7 @@ training_args = TrainingArguments(
     per_device_eval_batch_size=batch_size,
     per_device_train_batch_size=batch_size,
     remove_unused_columns=False,
+    save_strategy='no',
 )
 trainer = Trainer(
     model=model,
@@ -121,10 +122,11 @@ trainer = Trainer(
     data_collator=whole_word_masking_data_collator,
 )
 eval_results = trainer.evaluate()
-print(f">>> Perplexity: {math.exp(eval_results['eval_loss']):.2f}")
+print(eval_results)
+#print(f">>> Perplexity: {math.exp(eval_results['eval_loss']):.2f}")
 trainer.train()
 eval_results = trainer.evaluate()
-print(f">>> Perplexity: {math.exp(eval_results['eval_loss']):.2f}")
+#print(f">>> Perplexity: {math.exp(eval_results['eval_loss']):.2f}")
 
 
 
