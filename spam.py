@@ -13,12 +13,11 @@ checkpoint = "distilbert-base-uncased"
 model = AutoModelForMaskedLM.from_pretrained(checkpoint)
 for k, v in model.named_parameters():
     # print(type(v))
-#    v.requires_grad_(False)
-    pass
+    v.requires_grad_(False)
+#     pass
 
 # for k, v in model.named_parameters():
 #     print(v)
-model.forward(input_ids=None, attention_mask=None, labels=None)
 tokenizer = AutoTokenizer.from_pretrained(checkpoint)
 imdb_dataset = load_dataset('imdb')
 train_size = 20_000
@@ -26,7 +25,7 @@ test_size = 2000
 imdb_dataset = imdb_dataset["train"].train_test_split(
     train_size=train_size, test_size=test_size, seed=42
 )
-print(imdb_dataset)
+
 
 
 def tokenize_function(examples):
@@ -37,10 +36,10 @@ def tokenize_function(examples):
 
 
 tokenized_datasets = imdb_dataset.map(tokenize_function, batched=True, remove_columns=["text", "label"])
-print(tokenized_datasets)
+# print(tokenized_datasets)
 chunk_size = 128
-tokenized_samples = tokenized_datasets["train"][:3]
-print(tokenized_samples)
+# tokenized_samples = tokenized_datasets["train"][:3]
+# print(tokenized_samples)
 
 
 def group_texts(examples):
