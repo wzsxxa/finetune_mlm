@@ -11,14 +11,15 @@ import math
 
 checkpoint = "distilbert-base-uncased"
 model = AutoModelForMaskedLM.from_pretrained(checkpoint)
+# model.forward(input_ids=None, attention_mask=None, labels=None)
 tokenizer = AutoTokenizer.from_pretrained(checkpoint)
-imdb_dataset = load_dataset('imdb', cache_dir="~/datasets")
+imdb_dataset = load_dataset('imdb')
 train_size = 20_000
 test_size = 2000
 imdb_dataset = imdb_dataset["train"].train_test_split(
     train_size=train_size, test_size=test_size, seed=42
 )
-# print(imdb_dataset)
+print(imdb_dataset)
 
 
 def tokenize_function(examples):
@@ -124,6 +125,7 @@ print(f">>> Perplexity: {math.exp(eval_results['eval_loss']):.2f}")
 trainer.train()
 eval_results = trainer.evaluate()
 print(f">>> Perplexity: {math.exp(eval_results['eval_loss']):.2f}")
+
 
 
 
